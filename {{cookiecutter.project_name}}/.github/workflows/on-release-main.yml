@@ -94,8 +94,8 @@ jobs:
             file: ./Dockerfile
             push: true
             tags: |
-              ghcr.io/{{ cookiecutter.author_github_handle }}/mcp-email-server:{% raw %}${{ steps.vars.outputs.tag }}{% endraw %}
-              ghcr.io/{{ cookiecutter.author_github_handle }}/mcp-email-server:latest
+              ghcr.io/{{ cookiecutter.author_github_handle }}/{{cookiecutter.project_name}}:{% raw %}${{ steps.vars.outputs.tag }}{% endraw %}
+              ghcr.io/{{ cookiecutter.author_github_handle }}/{{cookiecutter.project_name}}:latest
 {% endif %}
 {%- if cookiecutter.mkdocs == "y" %}
   deploy-docs:
