@@ -17,6 +17,7 @@ repos:
     rev: 0.7.22
     hooks:
       - id: mdformat
+        args: [--number]
         additional_dependencies:
           [mdformat-gfm, mdformat-front-matters, mdformat-footnote]
   - repo: https://github.com/astral-sh/ruff-pre-commit
