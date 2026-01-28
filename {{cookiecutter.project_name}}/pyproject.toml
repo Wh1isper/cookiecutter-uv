@@ -5,16 +5,14 @@ description = "{{cookiecutter.project_description}}"
 authors = [{ name = "{{cookiecutter.author}}", email = "{{cookiecutter.email}}" }]
 readme = "README.md"
 keywords = ['python']
-requires-python = ">=3.10,<4.0"
+requires-python = ">=3.11,<4.0"
 classifiers = [
     "Intended Audience :: Developers",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3.14",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
@@ -30,7 +28,7 @@ dev = [
     "pytest-asyncio>=0.25.3",
     "tox-uv>=1.11.3",
     {% if cookiecutter.deptry == 'y' %}"deptry>=0.22.0",{% endif %}
-    "mypy>=0.991",
+    "pyright>=1.1.350",
     {% if cookiecutter.codecov == 'y' %}"pytest-cov>=4.0.0",{% endif %}
     "ruff>=0.9.2",
     {% if cookiecutter.mkdocs == 'y' %}"mkdocs>=1.4.2",
@@ -47,24 +45,16 @@ build-backend = "hatchling.build"
 py-modules = ["{{cookiecutter.project_slug}}"]
 {%- endif %}
 
-[tool.mypy]
-files = [
-    {%- if cookiecutter.layout == "src" -%}
-    "src"
-    {%- else -%}
-    "{{cookiecutter.project_slug}}"
-    {%- endif -%}
-]
-disallow_untyped_defs = true
-disallow_any_unimported = true
-no_implicit_optional = true
-check_untyped_defs = true
-warn_return_any = true
-warn_unused_ignores = true
-show_error_codes = true
+[tool.pyright]
+{%- if cookiecutter.layout == "src" %}
+include = ["src"]
+{%- else %}
+include = ["{{cookiecutter.project_slug}}"]
+{%- endif %}
+typeCheckingMode = "standard"
 
 [tool.ruff]
-target-version = "py39"
+target-version = "py311"
 line-length = 120
 fix = true
 

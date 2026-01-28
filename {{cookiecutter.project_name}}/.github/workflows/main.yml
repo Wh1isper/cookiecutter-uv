@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.11", "3.12", "3.13"]
       fail-fast: false
     env:
       UV_PYTHON: {% raw %}${{ matrix.python-version }}{% endraw %}
@@ -49,7 +49,7 @@ jobs:
         run: uv run python -m pytest tests {% if cookiecutter.codecov == "y" %}--cov --cov-config=pyproject.toml --cov-report=xml{%- endif %}
 
       - name: Check typing
-        run: uv run mypy
+        run: uv run pyright
 
 {% if cookiecutter.codecov == "y" %}
       - name: Upload coverage reports to Codecov with GitHub Action on Python 3.13
